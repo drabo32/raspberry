@@ -9,3 +9,4 @@ sudo tar cvf /media/sauveDomoticz/domoticz_$DATE.tar /media/sauveDomoticz/domoti
 sudo rm -r  /media/sauveDomoticz/domoticz_$DATE/
 gzip /media/sauveDomoticz/domoticz_$DATE.tar
 date
+#Test
