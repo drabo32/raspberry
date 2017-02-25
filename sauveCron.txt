@@ -1,4 +1,4 @@
-s file to introduce tasks to be run by cron.
+# Edit this file to introduce tasks to be run by cron.
 #
 # Each task to run has to be defined through a single line
 # indicating with different fields when the task will be run
@@ -20,16 +20,27 @@ s file to introduce tasks to be run by cron.
 # For more information see the manual pages of crontab(5) and cron(8)
 #
 # m h  dom mon dow   command
-#Je sauvegarde toutes les semaines le systeme et les donnÃ©es
+#Je sauvegarde toutes les semaines le systeme et les données
 #il n'en garde que deux en ligne
 0 1  * * 1 ~/sauveRPI.sh 2>&1 > ~/resultSauveRPI.txt
-# Je recopie le fichier des donnÃ©es de Domoticz sur la clÃ© usb des documents
+# Je recopie le fichier des données de Domoticz sur la clé usb des documents
 0 4,16  * * *  ~/sauveDomoticz.sh 2>&1 > ~/resultSauveDomoticz.txt
-#J'arrÃªte et je relance Domoticz deux fois par semaine
+#J'arrète et je relance Domoticz deux fois par semaine
 0 3  * * 2,5 sudo service domoticz.sh restart
 # Tomber et relancer le dongle WiFi toutes les 2 heures
 #0 */2 * * * ( sudo ifdown wlan0 ; sudo ifup wlan0 ) 2>&1 > ~/resultRebootWiFi.txt
-0 */1 * * * (  sudo ifup wlan0 ) 2>&1 > ~/resultRebootWiFi.txt
-# Script qui permet de switcher en cas de puie cotÃ© Domoticz lancÃ© toutes les 10 minutes
+0 */2 * * * (  sudo ifup wlan0 ) 2>&1 > ~/resultRebootWiFi.txt
+# Script qui permet de switcher en cas de puie coté Domoticz lancé toutes les 10 minutes
 */10 * * * * bash ~/domoticz/scripts/pluie.sh  2>&1 > ~/Pluie.txt
+# Je relance Domoticz toutes les heures car la version installée plante
+#0 */1 * * * sudo service domoticz.sh restart
+# Scripts pour les sondes de temperature toutes les minutes lancé toutes les 10 minutes
+*/1 * * * * bash ~/domoticz/scripts/Theo.sh  2>&1 > /dev/null
+*/1 * * * * bash ~/domoticz/scripts/Chloe.sh  2>&1 > /dev/null
+*/1 * * * * bash ~/domoticz/scripts/PaEtMa.sh  2>&1 > /dev/null
+*/1 * * * * bash ~/domoticz/scripts/Refrigerateur.sh  2>&1 > /dev/null
+*/1 * * * * bash ~/domoticz/scripts/Salon.sh  2>&1 > /dev/null
+*/1 * * * * bash ~/domoticz/scripts/Garage.sh  2>&1 > /dev/null
+*/1 * * * * bash ~/domoticz/scripts/Exterieur.sh  2>&1 > /dev/null
+*/1 * * * * bash ~/domoticz/scripts/Piscine.sh  2>&1 > /dev/null
 
